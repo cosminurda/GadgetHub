@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | GadgetHub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .team-member {
+            margin-bottom: 20px;
+        }
+        .team-member img {
+            border-radius: 50%;
+            max-width: 150px;
+        }
+        .review-card {
+            margin-bottom: 20px;
+        }
+        .review-card .card-body {
+            display: flex;
+            align-items: center;
+        }
+        .review-card .card-body img {
+            border-radius: 50%;
+            max-width: 60px;
+            margin-right: 15px;
+        }
+        .review-card .stars {
+            color: #ffc107;
+        }
+        .edit-section, .delete-button {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-dark text-white">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center py-3">
+                <div class="logo">
+                    <a href="index.html" class="text-white text-decoration-none">GadgetHub</a>
+                </div>
+                <nav>
+                    <ul class="nav">
+                        <li class="nav-item"><a href="index.html" class="nav-link text-white">Home</a></li>
+                        <li class="nav-item"><a href="shop.html" class="nav-link text-white">Shop</a></li>
+                        <li class="nav-item"><a href="about.html" class="nav-link text-white">About Us</a></li>
+                        <li class="nav-item"><a href="contact.html" class="nav-link text-white">Contact</a></li>
+                    </ul>
+                </nav>
+                <div>
+                    <button class="btn btn-outline-light mr-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+                    <button class="btn btn-outline-light mr-2" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
+                    <button class="btn btn-warning" onclick="location.href='shop.html'">Shop Now</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container my-5">
+        <h1>About Us</h1>
+        <p>Welcome to GadgetHub! We are passionate about the latest gadgets and technology. Our mission is to provide our customers with the best and most innovative devices on the market.</p>
+        
+        <section class="my-5">
+            <h2>Our Team</h2>
+            <div class="row" id="team-list">
+                <!-- Team members will be injected here by JavaScript -->
+            </div>
+
+            <button class="btn btn-primary" id="edit-team-btn">Editează</button>
+
+            <div class="edit-section" id="edit-section">
+                <h3>Add New Team Member</h3>
+                <form id="add-team-member-form">
+                    <div class="mb-3">
+                        <label for="team-member-name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="team-member-name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="team-member-role" class="form-label">Role</label>
+                        <input type="text" class="form-control" id="team-member-role" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="team-member-image" class="form-label">Image URL</label>
+                        <input type="text" class="form-control" id="team-member-image" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Team Member</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="my-5">
+            <h2>Reviews</h2>
+            <div class="row">
+                <div class="col-md-4 review-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <img src="reviewer1.jpg" alt="Reviewer 1">
+                            <div>
+                                <h5 class="card-title">Alice Brown</h5>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p class="card-text">"GadgetHub has the best selection of gadgets. I'm always impressed with their products!"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 review-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <img src="reviewer2.jpg" alt="Reviewer 2">
+                            <div>
+                                <h5 class="card-title">Michael Green</h5>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <p class="card-text">"Great customer service and fast shipping. Highly recommend GadgetHub!"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 review-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <img src="reviewer3.jpg" alt="Reviewer 3">
+                            <div>
+                                <h5 class="card-title">Sara White</h5>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <p class="card-text">"I love shopping at GadgetHub. They always have the latest gadgets and at great prices!"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadTeamMembers();
+
+            document.getElementById('add-team-member-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                await addTeamMember();
+            });
+
+            document.getElementById('edit-team-btn').addEventListener('click', () => {
+                const editSection = document.getElementById('edit-section');
+                const deleteButtons = document.querySelectorAll('.delete-button');
+                if (editSection.style.display === 'none' || editSection.style.display === '') {
+                    editSection.style.display = 'block';
+                    deleteButtons.forEach(button => button.style.display = 'inline-block');
+                } else {
+                    editSection.style.display = 'none';
+                    deleteButtons.forEach(button => button.style.display = 'none');
+                }
+            });
+        });
+
+        async function loadTeamMembers() {
+            const response = await fetch('/team');
+            const team = await response.json();
+            renderTeam(team);
+        }
+
+        function renderTeam(team) {
+            const teamList = document.getElementById('team-list');
+            teamList.innerHTML = '';
+            team.forEach((member) => {
+                const memberDiv = document.createElement('div');
+                memberDiv.classList.add('col-md-4', 'team-member', 'text-center');
+                memberDiv.innerHTML = `
+                    <img src="${member.image}" alt="${member.name}">
+                    <h3>${member.name}</h3>
+                    <p>${member.role}</p>
+                    <button class="btn btn-danger delete-button" style="display: none;" onclick="removeTeamMember('${member._id}')">Remove</button>
+                `;
+                teamList.appendChild(memberDiv);
+            });
+        }
+
+        async function addTeamMember() {
+            const name = document.getElementById('team-member-name').value;
+            const role = document.getElementById('team-member-role').value;
+            const image = document.getElementById('team-member-image').value;
+
+            const response = await fetch('/team', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, role, image })
+            });
+
+            const newMember = await response.json();
+            await loadTeamMembers();
+            document.getElementById('add-team-member-form').reset();
+        }
+
+        async function removeTeamMember(id) {
+            await fetch(`/team/${id}`, {
+                method: 'DELETE'
+            });
+
+            await loadTeamMembers();
+        }
+    </script>
+</body>
+</html>

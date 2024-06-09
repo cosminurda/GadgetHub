@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .product {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 16px;
+            text-align: center;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+        }
+        .product img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+        }
+        .product h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .product .price {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        .product .btn {
+            margin-bottom: 5px;
+        }
+        .edit-section {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center py-3">
+                <div class="logo">
+                    <a href="index.html" class="text-white text-decoration-none">GadgetHub</a>
+                </div>
+                <nav>
+                    <ul class="nav">
+                        <li class="nav-item"><a href="index.html" class="nav-link text-white">Home</a></li>
+                        <li class="nav-item"><a href="shop.html" class="nav-link text-white">Shop</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link text-white">About Us</a></li>
+                        <li class="nav-item"><a href="contact.html" class="nav-link text-white">Contact</a></li>
+                    </ul>
+                </nav>
+                <div>
+                    <button class="btn btn-secondary me-2" onclick="location.href='index.html'">Home</button>
+                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#cartModal">Shop Now</button>
+                </div>
+            </div>
+        </div>
+        <div class="cart mr-auto">
+            <a class="cart-link" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">Cart (<span id="cart-count">0</span>)</a>
+        </div>
+    </header>
+    <main class="shop-page">
+        <div class="container">
+            <h1>Our Products</h1>
+            <div class="row" id="product-list">
+                <!-- Products will be injected here by JavaScript -->
+            </div>
+
+            <button class="btn btn-primary" id="edit-products-btn">Editează</button>
+
+            <div class="edit-section" id="edit-section">
+                <h2>Add New Product</h2>
+                <form id="add-product-form">
+                    <div class="mb-3">
+                        <label for="product-name" class="form-label">Product Name</label>
+                        <input type="text" class="form-control" id="product-name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="product-price" class="form-label">Product Price</label>
+                        <input type="number" class="form-control" id="product-price" step="0.01" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="product-image" class="form-label">Product Image URL</label>
+                        <input type="text" class="form-control" id="product-image" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Product</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Cart Modal -->
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cartModalLabel">Your Cart</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul id="cart-items" class="list-group mb-3">
+                        <!-- Cart items will be injected here -->
+                    </ul>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5>Total: $<span id="cart-total">0.00</span></h5>
+                        <button class="btn btn-success" onclick="openCheckoutModal()">Proceed to Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="checkoutModalLabel">Checkout</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="checkout-form">
+                        <div class="mb-3">
+                            <label for="full-name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="full-name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="address" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="city" class="form-label">City</label>
+                            <input type="text" class="form-control" id="city" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="zip" class="form-label">ZIP Code</label>
+                            <input type="text" class="form-control" id="zip" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="card-number" class="form-label">Card Number</label>
+                            <input type="text" class="form-control" id="card-number" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="card-expiry" class="form-label">Expiry Date</label>
+                            <input type="text" class="form-control" id="card-expiry" placeholder="MM/YY" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="card-cvc" class="form-label">CVC</label>
+                            <input type="text" class="form-control" id="card-cvc" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Payment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let products = [];
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            document.getElementById('cart-count').innerText = cart.length;
+            await loadProducts();
+            renderProducts();
+            updateCartModal();
+
+            document.getElementById('add-product-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                addProduct();
+            });
+
+            document.getElementById('checkout-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                submitCheckout();
+            });
+
+            document.getElementById('edit-products-btn').addEventListener('click', () => {
+                const editSection = document.getElementById('edit-section');
+                const deleteButtons = document.querySelectorAll('.delete-button');
+                if (editSection.style.display === 'none' || editSection.style.display === '') {
+                    editSection.style.display = 'block';
+                    deleteButtons.forEach(button => button.style.display = 'inline-block');
+                } else {
+                    editSection.style.display = 'none';
+                    deleteButtons.forEach(button => button.style.display = 'none');
+                }
+            });
+        });
+
+        async function loadProducts() {
+            const response = await fetch('/products');
+            products = await response.json();
+            renderProducts();
+        }
+
+        function renderProducts() {
+            const productList = document.getElementById('product-list');
+            productList.innerHTML = '';
+            products.forEach((product) => {
+                const productDiv = document.createElement('div');
+                productDiv.classList.add('col-md-4');
+                productDiv.innerHTML = `
+                    <div class="product">
+                        <img src="${product.image}" alt="${product.name}">
+                        <h2>${product.name}</h2>
+                        <p class="price">$${product.price.toFixed(2)}</p>
+                        <button class="btn btn-primary" onclick="addToCart('${product.name}', ${product.price})">Add to Cart</button>
+                        <button class="btn btn-danger mt-2 delete-button" style="display: none;" onclick="removeProduct('${product._id}')">Remove Product</button>
+                    </div>
+                `;
+                productList.appendChild(productDiv);
+            });
+        }
+
+        async function addProduct() {
+            const productName = document.getElementById('product-name').value;
+            const productPrice = parseFloat(document.getElementById('product-price').value);
+            const productImage = document.getElementById('product-image').value;
+
+            const response = await fetch('/products', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name: productName, price: productPrice, image: productImage })
+            });
+
+            const newProduct = await response.json();
+            products.push(newProduct);
+            renderProducts();
+            document.getElementById('add-product-form').reset();
+        }
+
+        async function removeProduct(id) {
+            await fetch(`/products/${id}`, {
+                method: 'DELETE'
+            });
+
+            products = products.filter(product => product._id !== id);
+            renderProducts();
+        }
+
+        function addToCart(productName, productPrice) {
+            cart.push({ name: productName, price: productPrice });
+            document.getElementById('cart-count').innerText = cart.length;
+            localStorage.setItem('cart', JSON.stringify(cart)); // Save cart to localStorage
+            updateCartModal();
+        }
+
+        function updateCartModal() {
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            cartItems.innerHTML = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
+                li.innerHTML = `
+                    ${item.name} - $${item.price.toFixed(2)}
+                    <button class="btn btn-danger btn-sm" onclick="removeFromCart(${index})">Remove</button>
+                `;
+                cartItems.appendChild(li);
+                total += item.price;
+            });
+
+            cartTotal.innerText = total.toFixed(2);
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            document.getElementById('cart-count').innerText = cart.length;
+            localStorage.setItem('cart', JSON.stringify(cart)); // Update cart in localStorage
+            updateCartModal();
+        }
+
+        function openCheckoutModal() {
+            const cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
+            cartModal.hide();
+            const checkoutModal = new bootstrap.Modal(document.getElementById('checkoutModal'));
+            checkoutModal.show();
+        }
+
+        function submitCheckout() {
+            alert('Payment submitted successfully!');
+            // Clear cart and update local storage
+            cart = [];
+            localStorage.setItem('cart', JSON.stringify(cart));
+            document.getElementById('cart-count').innerText = cart.length;
+            updateCartModal();
+            const checkoutModal = new bootstrap.Modal(document.getElementById('checkoutModal'));
+            checkoutModal.hide();
+        }
+    </script>
+</body>
+</html>
